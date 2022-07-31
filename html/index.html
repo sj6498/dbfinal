@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    div class="container">
+
+    <nav class="navbar">
+
+        <ul class="nav-links">
+            <li><a href="#">HomeEats</a></li>
+            <div class="search">
+                <input type="text" placeholder="Enter delivery address">
+                <button class="btn">Find Food</button>
+            </div>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Log in</a></li>
+            <button>Sign Up</button>
+        </ul>
+    </nav>
+    <div class="main-content">
+
+
+        <div class="main-content">
+    
+    
+          <section id="iq-favorites">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-12 overflow-hidden">
+                  <div class="iq-main-header d-flex align-items-center justify-content-between">
+                    <h4 class="main-title">IN CINEMA</h4>
+                  </div>
+                  <div class="favorite-contens">
+                    <ul class="favorites-slider list-inline row p-0 mb-0">
+                   {% block list %}
+                   {% for movie in playing_now %}
+                      <li class="slide-item">
+                        <div class="block-images position-relative" style="margin-left: 30px">
+                          <div class="img-box">
+                            <img src="{{ movie.trailer_picture }}"class="img-fluid" alt="" style="height: 320px; width: 300px;" />
+                          </div>
+                          <div class="block-description">
+                            <h6 class="iq-title">
+                              <a href="#">{{ movie.title }} </a>
+                            </h6>
+                            <div style="max-width:75%;margin:0 auto;">
+                              <a class="popup-youtube" href="{{movie.trailer_video}}">
+                              <span class="btn btn-hover iq-button">
+                                <i class="fa fa-play mr-1"></i>
+                                Watch Trailer</a>
+                              </span>
+                            </div>
+                            {% if user.is_authenticated %}
+                            <div class="hover-buttons">
+                              {% with temp=movie.title %}
+                              <a href="{% url 'booking' %}?movie={{temp}}">
+                              <span class="btn btn-hover iq-button">
+                                <i class="fa fa-ticket mr-1"></i>
+                                Book Now</a>
+                              {% endwith %}
+                              </span>
+                            </div>
+                            {% endif %}
+                            {% if not user.is_authenticated %}
+                              <p>Please login to book</p>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </li>
+                      {% endfor %}
+                      {% endblock %}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    
+    
+    
+        <section id="iq-upcoming-movie">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12 overflow-hidden">
+                <div class="iq-main-header d-flex align-items-center justify-content-between">
+                  <h4 class="main-title">Coming Soon</h4>
+                </div>
+                <div class="favorite-contens">
+                  <ul class="favorites-slider list-inline row p-0 mb-0">
+                    {% block soon %}
+                    {% for mov in coming_soon %}
+                    <li class="slide-item">
+                      <div class="block-images position-relative" style="margin-left: 30px">
+                        <div class="img-box">
+                          <img src="{{ mov.trailer_picture }}" class="img-fluid" alt="" style="height: 320px; width: 300px;" />
+                        </div>
+                        <div class="block-description">
+                          <h6 class="iq-title">
+                            <a href="#"> {{mov.title}}</a>
+                          </h6>
+    
+                          <div style="max-width:75%;margin:0 auto;">
+                            <a class="popup-youtube" href="{{mov.trailer_video}}">
+                            <span class="btn btn-hover iq-button">
+                              <i class="fa fa-play mr-1"></i>
+                              Watch Trailer</a>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    {% endfor %}
+                    {% endblock %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>    
+    <footer class="footer">
+
+        <ul class="footer-links">
+            <li><a href="#">Terms of Privacy</a></li>
+            <li><a href="#">Cookies</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <li>&copy;2022</li>
+
+
+
+    </footer>
+
+    </div>
+</body>
+
+</html>

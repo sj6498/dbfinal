@@ -61,7 +61,9 @@ a{
     outline: none;
     cursor: pointer;
 }
-
+.navbar .nav-links button a{
+    color: white;
+}
 .nav-links i{
     margin-left: 0.34rem;
     
@@ -120,14 +122,7 @@ input[type = 'text']{
     font-size: 0.9rem;
 }
 
-.social-media{
-    display: flex;
-}
 
-.social-media li a{
-    padding: 0 1rem;
-    color: #777;
-}
 
 
 .cards-list {
